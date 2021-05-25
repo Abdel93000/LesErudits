@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formAnecdote 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	<h1>Proposer une anecdote</h1>
+
+	{{ form_start(formAnecdote) }}
+
+
+	{{form_row(formAnecdote.title, {'attr': {'placeholder': "Titre de l'anecdote"}}) }}
+	{{form_row(formAnecdote.content, {'attr': {'placeholder': "Contenu de l'anecdote"}}) }}
+	{{form_row(formAnecdote.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+	{{form_row(formAnecdote.category) }}
+
+
+	<br>
+	{% if editMode %}
+		<button type="submit" class="btn btn-success">Modifier</button>
+	{%  else %}
+		<button type="submit" class="btn btn-success">Soumettre l'anecdote</button>
+	{% endif %}
+
+	{{ form_end(formAnecdote) }}
+
+{% endblock %}
