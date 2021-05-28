@@ -2,13 +2,35 @@
 
 
 {% block body %}
-<section class="article">
-<article>
-    <h2>{{ anecdote.title }}</h2>
-    <div class="metadata">Ecrit le {{ anecdote.createdAt | date('d/m/Y')}} à  {{ anecdote.createdAt | date('h:i')}} dans la catégorie {{ anecdote.category }}</div>
-    <div class="content">
-        <img src="{{ anecdote.image }}" alt="">
-        {{ anecdote.content | raw }}
-    </div>
-</article>
-{% endblock %}
+	<section class="article">
+		<article>
+			<h2>{{ anecdote.title }}</h2>
+			<div class="metadata">Ecrit le
+				{{ anecdote.createdAt | date('d/m/Y')}}
+				à
+				{{ anecdote.createdAt | date('h:i')}}
+				dans la catégorie
+				{{ anecdote.category.title }}</div>
+			<div class="content">
+				<img src="{{ anecdote.image }}" alt="">
+				{{ anecdote.content | raw }}
+			</div>
+		</article>
+
+		<section id="commentaires">
+			{% for comment in anecdote.comments %}
+				<div class="comment">
+					<div class="row">
+						<div class="col-3">
+							{{comment.author}}
+							(<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
+						</div>
+						<div class="col">
+							{{comment.content | raw}}
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+		</section>
+	{% endblock %}
