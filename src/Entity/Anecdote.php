@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AnecdoteRepository::class)
+ * @ORM\Table(name="anecdote", indexes={@ORM\Index(columns={"title","content"}, flags={"fulltext"})})
  */
 class Anecdote
 {

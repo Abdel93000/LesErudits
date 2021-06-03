@@ -4,13 +4,16 @@
 
 {% block body %}
 <section class="article">
+
 <article>
 {% for anecdote in anecdotes %}
     <h2>{{ anecdote.title }}</h2>
     <div class="metadata">Ecrit le {{anecdote.createdAt | date('d/m/Y')}} à {{anecdote.createdAt | date('H:i')}} dans la catégorie {{ anecdote.category.title }}</div>
     <div class="content">
          {{ anecdote.content | raw }}
+         <br>
         <a href="{{ path ('anecdote_show', {'id': anecdote.id}) }}" class="btn btn-primary">lire la suite</a>
+        <hr>
     </div>
 </article>
 {% endfor %}

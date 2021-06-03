@@ -47,13 +47,13 @@ class AnecdoteController extends AbstractController
      */
     public function form(Anecdote $anecdote = null,Request $request, EntityManagerInterface $manager): Response
     {
-         // Si le Anecdote est différente de null alors on instancier la class Anecdote 
+         // Si l'Anecdote est différente de null alors on instancie la class Anecdote 
         if (!$anecdote) {
             $anecdote = new Anecdote();
         }
 
 
-        // $anecdote = new Anecdote();
+    
         $form = $this->createForm(AnecdoteType::class, $anecdote);
 
         $form->handleRequest($request);

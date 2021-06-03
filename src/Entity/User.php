@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * 
  */
 class User implements UserInterface
 {
@@ -31,15 +33,22 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe de passe est trop court, il doit faire au minimum 8 caractères")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
+     * @Assert\EqualTo(propertyPath="confirm_password")
      */
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password", message="le mot de passe est différent")
+     * @Assert\EqualTo(propertyPath="password")
      */
-
     public $confirm_password;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Roles::class, inversedBy="roles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $roles;
+
 
     public function getId(): ?int
     {
@@ -82,12 +91,25 @@ class User implements UserInterface
         return $this;
     }
 
-    public function eraseCredentials() {}
-    
-    public function getSalt(){}
+    public function getSalt()
+    {
 
-    public function getRoles(){
-    return['ROLE_USER'];
+    }
+
+    public function getRoles(): ?Roles
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
 
     }
 }

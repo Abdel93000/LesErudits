@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Anecdote;
+use App\Entity\Roles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Anecdote|null find($id, $lockMode = null, $lockVersion = null)
- * @method Anecdote|null findOneBy(array $criteria, array $orderBy = null)
- * @method Anecdote[]    findAll()
- * @method Anecdote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Roles|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Roles|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Roles[]    findAll()
+ * @method Roles[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AnecdoteRepository extends ServiceEntityRepository
+class RolesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Anecdote::class);
+        parent::__construct($registry, Roles::class);
     }
 
     // /**
@@ -25,10 +25,10 @@ class AnecdoteRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('a')
+        return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
+            ->orderBy('r.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -37,10 +37,10 @@ class AnecdoteRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Anecdote
+    public function findOneBySomeField($value): ?Roles
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
